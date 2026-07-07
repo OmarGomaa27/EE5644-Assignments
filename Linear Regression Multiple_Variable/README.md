@@ -8,41 +8,40 @@ The main goal is to answer this question:
 
 > Given which add-on services a customer subscribes to, what monthly charge should we expect them to pay?
 
-The model uses the required 10 service indicator variables as predictors and `MonthlyCharges` as the target variable.
+The model uses the required 10 service indicator variables as predictors and `target` as the monthly charge target variable.
 
 ## Dataset
 
-The dataset used is the Telco Customer Churn dataset from Kaggle:
-
-**Dataset:** `blastchar/telco-customer-churn`
-
-The notebook downloads the dataset directly using `kagglehub`:
-
-```python
-path = kagglehub.dataset_download("blastchar/telco-customer-churn")
-```
-
-The original CSV file is:
+The dataset used in this project is a cleaned/prepared Telco dataset saved locally as:
 
 ```text
-WA_Fn-UseC_-Telco-Customer-Churn.csv
+telco.csv
 ```
+
+The notebook loads the dataset directly using:
+
+```python
+csv_file = "telco.csv"
+df = pd.read_csv(csv_file)
+```
+
+The original data source is the Telco Customer Churn dataset from Kaggle:
+
+```text
+blastchar/telco-customer-churn
+```
+
+To reproduce the project locally, place `telco.csv` in the same folder as the notebook before running the cells.
 
 ## Target Variable
 
 The target variable is:
 
 ```text
-MonthlyCharges
-```
-
-In the notebook, it is renamed to:
-
-```text
 target
 ```
 
-This is a continuous numeric variable, so linear regression is appropriate.
+This column represents the customer's monthly charge. It is a continuous numeric variable, so linear regression is appropriate.
 
 ## Predictor Variables
 
@@ -63,19 +62,15 @@ InternetService_No
 
 Each predictor is encoded as a clean 0/1 indicator.
 
-## Cleaning and Encoding Steps
+## Cleaning and Preparation Steps
 
-The notebook performs the following cleaning steps:
+The notebook performs the following steps:
 
-1. Loads the Telco dataset.
+1. Loads the prepared Telco dataset from `telco.csv`.
 2. Inspects the data using `head`, `shape`, `describe`, `info`, and missing-value checks.
-3. Converts service values such as `No internet service` and `No phone service` into `No`.
-4. Encodes Yes/No service columns as 1/0.
-5. One-hot encodes `InternetService` to create:
-   - `InternetService_Fiber optic`
-   - `InternetService_No`
-6. Renames `MonthlyCharges` to `target`.
-7. Verifies that the final model predictors are clean 0/1 columns with no missing values.
+3. Confirms that `target` is the monthly charge target variable.
+4. Selects the required 10 service indicator predictors.
+5. Verifies that the final predictor columns are clean 0/1 indicators with no missing values.
 
 ## Model
 
@@ -125,17 +120,18 @@ The multivariable model performs much better than the baseline because it knows 
 
 ## Charts Included
 
-The notebook includes two charts:
+The notebook includes three charts:
 
 1. Estimated contribution of each service.
-2. Actual monthly charge vs. predicted monthly charge.
+2. Prediction error comparison between the baseline and multivariable model.
+3. R2 score comparison between the baseline and multivariable model.
 
 ## How to Run
 
-1. Open the notebook in Google Colab or Jupyter Notebook.
-2. Install the required libraries listed in `requirements.txt` if running locally.
-3. Run all cells from top to bottom.
-4. The notebook will download the dataset, clean it, train the model, evaluate performance, and display results.
+1. Make sure `telco.csv` is in the same folder as the notebook.
+2. Open `Linear_Regression_Multiple_Variable.ipynb` in Jupyter Notebook, VS Code, or Google Colab.
+3. Install the required libraries listed in `requirements.txt`.
+4. Run all cells from top to bottom.
 
 ## Required Libraries
 
@@ -144,7 +140,6 @@ numpy
 pandas
 matplotlib
 scikit-learn
-kagglehub
 ```
 
 ## Files
@@ -153,6 +148,7 @@ kagglehub
 Linear_Regression_Multiple_Variable.ipynb
 README.md
 requirements.txt
+telco.csv
 ```
 
 ## Author
