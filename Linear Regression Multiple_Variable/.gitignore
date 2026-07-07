@@ -31,7 +31,6 @@ Thumbs.db
 .cache/
 kagglehub/
 *.zip
-telco.csv
 
 # Logs
 *.log
