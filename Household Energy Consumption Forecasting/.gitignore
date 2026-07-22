@@ -1,0 +1,15 @@
+# Dataset
+household_power_consumption.txt
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Models and training outputs
+*.keras
+*.h5
+checkpoints/
+logs/
+
+# Python
+__pycache__/
+*.pyc
