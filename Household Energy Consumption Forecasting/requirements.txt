@@ -1,7 +1,0 @@
-numpy
-pandas
-matplotlib
-scikit-learn
-tensorflow==2.21.0
-jupyter
-ipykernel
